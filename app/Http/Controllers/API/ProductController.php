@@ -21,7 +21,7 @@ class ProductController extends Controller
         if($product){
             return response()->json(['data' => ['product' => $product], 'message' => 'Product retrieved successfully'], 200);
         } else {
-            return response()->json(['data' => [], 'message' => 'Product Not Found'], 404);
+            return response()->json(['data' => [], 'message' => 'Product is not in our system'], 404);
         }
 
     }
