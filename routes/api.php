@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UserAuthController;
 
 /*
@@ -15,6 +16,8 @@ use App\Http\Controllers\API\UserAuthController;
 |
 */
 
+Route::post('import',[ProductController::class,'import']);
+Route::post('get-instructions',[ProductController::class,'getInstructions']);
 Route::post('register',[UserAuthController::class,'register']);
 Route::post('login',[UserAuthController::class,'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
