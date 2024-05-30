@@ -20,6 +20,7 @@ Route::post('import',[ProductController::class,'import']);
 Route::post('get-instructions',[ProductController::class,'getInstructions']);
 Route::post('register',[UserAuthController::class,'register']);
 Route::post('login',[UserAuthController::class,'login']);
+Route::post('add-suggestions',[ProductController::class,'addSuggestion']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout',[UserAuthController::class,'logout']);
     Route::get('get-user',[UserAuthController::class,'getUser']);

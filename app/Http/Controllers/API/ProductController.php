@@ -4,10 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Product;
 use App\Models\Material;
+use App\Models\ProductSuggestion;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductSuggestionRequest;
 
 class ProductController extends Controller
 {
@@ -40,7 +42,7 @@ class ProductController extends Controller
         if ($product) {
             return response()->json(['data' => ['product' => $product], 'message' => 'Product retrieved successfully'], 200);
         } else {
-            return response()->json(['data' => [], 'message' => 'Product is not in our system'], 404);
+            return response()->json(['data' => ['barcode' => $barcode], 'message' => 'Product is not in our system'], 404);
         }
     }
 
@@ -71,6 +73,15 @@ class ProductController extends Controller
             return ['error' => $e->getMessage()];
         }
     }
+
+    public function addSuggestion(ProductSuggestionRequest $request){
+        $suggestion = new ProductSuggestion();
+        $suggestion->name = $request->name;
+        $suggestion->barcode = $request->barcode;
+        $suggestion->save();
+        return response()->json(['data'=> [], 'message' => "Suggestions added successfully."],200);
+    }
+
     public function import(Request $request)
     {
         $products = $request->all()['products'];
