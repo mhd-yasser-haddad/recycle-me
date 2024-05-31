@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Carbon\Carbon;
 use App\Models\User;
 
 use App\Http\Requests\LoginRequest;
@@ -36,6 +37,9 @@ class UserAuthController extends Controller
             return $this->customResponse([], __('api.invalid_credentials'), 401);
         }
         $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
+        $user->last_login_at = Carbon::now()->toDateTimeString();
+        $user->last_login_ip = $request->getClientIp();
+        $user->save();
         $data = ['user' => $user, 'token' => $token];
         return $this->customResponse($data, __('api.success'), 200);
     }

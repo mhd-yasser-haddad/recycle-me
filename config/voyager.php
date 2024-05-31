@@ -147,6 +147,7 @@ return [
             'App\\Widgets\\UserWidget',
             'App\\Widgets\\MaterialWidget',
             'App\\Widgets\\ProductWidget',
+            'App\\Widgets\\WeekActivityWidget',
         ],
 
     ],
